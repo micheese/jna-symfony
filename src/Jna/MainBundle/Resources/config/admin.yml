@@ -1,0 +1,22 @@
+services:
+    sonata.admin.project:
+        class: Jna\MainBundle\Admin\ProjectAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Projet" }
+        arguments:
+            - ~
+            - Jna\MainBundle\Entity\Project
+            - ~
+        calls:
+            - [ setTranslationDomain, [JnaMainBundle]]
+
+    sonata.admin.worktype:
+        class: Jna\MainBundle\Admin\WorkTypeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Type de projet" }
+        arguments:
+            - ~
+            - Jna\MainBundle\Entity\WorkType
+            - ~
+        calls:
+            - [ setTranslationDomain, [JnaMainBundle]]

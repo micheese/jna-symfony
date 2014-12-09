@@ -1,0 +1,240 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    <!-- Header -->
+    <header>
+        <div class="sticky-nav">
+            <a id="mobile-nav" class="menu-nav" href="#menu-nav"></a>
+            <div style="display: inline;margin-left: 20px">
+                <a href="/">
+                    <img class="jna-top-logo" style="max-width: 100%;max-height: 100%" src="{{ asset('build/img/jna-small-logo.png') }}">
+                </a>
+            </div>
+
+            <nav id="menu">
+                <ul id="menu-nav">
+                    <li><a href="#work" class="current">Nos réalisations</a></li>
+                    <li><a href="#about">Qui sommes-nous ?</a></li>
+                    <li><a href="#contact">Contactez-nous</a></li>
+                </ul>
+            </nav>
+
+
+        </div>
+    </header>
+    <!-- End Header -->
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+                    <div class="flash-notice">
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Our Work Section -->
+    <div id="work" class="page">
+        <div class="container">
+            <!-- Title Page -->
+            <div class="row">
+                <div class="span12">
+                    <div class="title-page">
+                        <h2 class="title">Nos réalisations</h2>
+                    </div>
+                </div>
+            </div>
+            <!-- End Title Page -->
+
+            <!-- Portfolio Projects -->
+            <div class="row">
+                <div class="span3">
+                    <!-- Filter -->
+                    <div class="hidden-xs" style="width: 150px;height: 70px;margin-bottom: 30px">
+                        <img class="jna-top-logo" style="max-width: 100%;max-height: 100%" src="{{ asset('build/img/jna-big-logo.png') }}">
+                    </div>
+                    <nav id="options" class="work-nav">
+                        <ul id="filters" class="option-set" data-option-key="filter">
+                            <li class="type-work">Portfolio</li>
+                            <li><a href="#filter" data-option-value="*" class="selected">Tous</a></li>
+                            {% for workType in workTypes %}
+                                <li><a href="#filter" data-option-value="{{ '.'~workType.machineName }}">{{ workType.type }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
+                    <!-- End Filter -->
+                </div>
+
+                <div class="span9">
+                    <div class="row">
+                        <section id="projects">
+                            <ul id="thumbs">
+                                {% for project in projects %}
+                                    <!-- Item Project and Filter Name -->
+                                    {% if project.workType is not null %}
+                                        <li class="item-thumbs span3 {{ project.workType.machineName }}">
+                                            <!-- Fancybox - Gallery Enabled - Title - Full Image -->
+                                            <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="{{ project.title }}" href="{{ asset('build/img/projects/' ~ project.filename) }}">
+                                                <span class="overlay-img"></span>
+                                                <span class="overlay-img-thumb font-icon-plus"></span>
+                                            </a>
+                                            <!-- Thumb Image and Description -->
+                                            {% if project.filename is not null %}
+                                                <img src="{{ asset('build/img/projects/' ~ project.filename) | apply_filter('project_thumb') }}" alt= "{{ project.description }} ">
+                                            {% endif %}
+
+                                        </li>
+                                        <!-- End Item Project -->
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </section>
+
+                    </div>
+                </div>
+            </div>
+            <!-- End Portfolio Projects -->
+        </div>
+    </div>
+    <!-- End Our Work Section -->
+
+    <!-- About Section -->
+    <div id="about" class="page-alternate">
+        <div class="container">
+            <!-- Title Page -->
+            <div class="row">
+                <div class="span12">
+                    <div class="title-page">
+                        <h2 class="title">Qui sommes-nous ?</h2>
+                        <h3 class="title-description">Apprenez-en davantage sur notre équipe et notre philosophie</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- End Title Page -->
+
+            <!-- People -->
+            <div class="row">
+                <!-- Start Profile -->
+                <div class="span12 profile">
+                    <h3 class="profile-name">Notre philosophie</h3>
+                    <p class="profile-description">JNA Rénovation est une compagnie de rénovation complètement assurée et accréditée qui œuvre dans le milieu depuis 2014.<br/>
+                        Afin de proposer à notre clientèle un produit dont elle sera entièrement satisfaite, nous sommes soucieux de nous adapter à son budget et à ses exigences<br/> tout en prenant en considération l’état des lieux.
+                        Nous offrons un travail de grande qualité et qui est effectué avec le souci du détail et de la finition.<br/>
+                        Nous nous assurons de respecter la propriété et les biens du client en protégeant adéquatement les lieux,
+                        notamment en contrôlant la poussière due aux travaux et en nous affairant de manière sécuritaire.<br/>
+                        Une éthique du travail minutieux et bien fait nous porte à protéger les rénovations effectuées au fil de leur avancement.</p>
+                </div>
+
+                <div class="span12 profile">
+                    <h3 class="profile-name">Nos domaines d’expertise</h3>
+                    <p class="profile-description">JNA Rénovation est spécialiste des travaux de rénovation de la <strong>salle de bain</strong>, de la <strong>cuisine</strong>, du <strong>sous-sol</strong> et du <strong>balcon</strong>.<br/>
+                        Au fil des ans, notre expertise s’est également étendue au revêtement extérieur, à la toiture, à l’installation de portes et fenêtres, ainsi qu’au plâtrage et à la peinture.
+                        Nous nous faisons un point d’honneur de répondre aux besoins du client,
+                        que nous conseillons au meilleur de nos connaissances afin qu’il prenne la décision la plus éclairée possible et qu’il soit satisfait du résultat.<br/>
+                        Tout en étant attentifs aux demandes spécifiques de la clientèle, nous nous attachons à lui livrer un excellent produit qui respecte en tous points les normes d’excellence du milieu.</p>
+                </div>
+                <!-- End Profile -->
+            </div>
+            <!-- End People -->
+        </div>
+    </div>
+    <!-- End About Section -->
+
+
+
+    <!-- Contact Section -->
+    <div id="contact" class="page">
+        <div class="container">
+            <!-- Title Page -->
+            <div class="row">
+                <div class="span12">
+                    <div class="title-page">
+                        <h2 class="title">Contactez-nous</h2>
+                        <h3 class="title-description">Pour vos projets ou vos questions, écrivez-nous.</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- End Title Page -->
+
+            <!-- Contact Form -->
+            <div class="row">
+                <div class="span9">
+
+                    <form id="contact-form" class="contact-form" action="{{ path('main_homepage') }}" method="post">
+                        <p class="contact-name">
+                            {{ form_row(form.name) }}
+                        </p>
+                        <p class="contact-email">
+                            {{ form_row(form.email) }}
+                        </p>
+                        <p class="contact-message">
+                            {{ form_row(form.body) }}
+                        </p>
+                        {{ form_rest(form) }}
+                        <p class="contact-submit">
+                            <input class="submit" type="submit" value="Envoyez votre courriel" />
+                        </p>
+                    </form>
+
+                    {#<form id="contact-form" class="contact-form" action="#">#}
+                        {#<p class="contact-name">#}
+                            {#<input id="contact_name" type="text" placeholder="Nom complet" value="" name="name" />#}
+                            {#{{ form_row(form.name) }}#}
+                        {#</p>#}
+                        {#<p class="contact-email">#}
+                            {#<input id="contact_email" type="text" placeholder="Adresse mail" value="" name="email" />#}
+                            {#{{ form_row(form.email) }}#}
+                        {#</p>#}
+                        {#<p class="contact-message">#}
+                            {#<textarea id="contact_message" placeholder="Votre message" name="message" rows="15" cols="40"></textarea>#}
+                            {#{{ form_row(form.body) }}#}
+                        {#</p>#}
+                        {#{{ form_rest(form) }}#}
+                        {#<p class="contact-submit">#}
+                            {#<input type="submit" value="Envoyez votre courriel" />#}
+                        {#</p>#}
+
+                        {#<div id="response">#}
+
+                        {#</div>#}
+                    {#</form>#}
+
+                </div>
+
+                <div class="span3">
+                    <div class="contact-details">
+                        <h3>JNA-Renovation</h3>
+                        <ul>
+                            <li><a href="#">jean-nicolas@jna-renovation.com</a></li>
+                            <li>(514) 839-3424</li>
+                            <li>
+                                JNA Rénovation Inc.
+                            </li>
+                            <li>
+                                #RBQ : 5680-7563-01
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- End Contact Form -->
+        </div>
+    </div>
+    <!-- End Contact Section -->
+
+    <!-- Footer -->
+    <footer>
+        <p class="credits">&copy;2013 Brushed. <a href="http://themes.alessioatzeni.com/html/brushed/" title="Brushed | Responsive One Page Template">Brushed Template</a></p>
+    </footer>
+    <!-- End Footer -->
+
+    <!-- Back To Top -->
+    <a id="back-to-top" href="#">
+        <i class="font-icon-arrow-simple-up"></i>
+    </a>
+    <!-- End Back to Top -->
+
+{% endblock %}

@@ -1,0 +1,5 @@
+main_homepage:
+    path:     /
+    defaults: { _controller: mainBundle:Default:index }
+    requirements:
+        _method:  GET|POST
