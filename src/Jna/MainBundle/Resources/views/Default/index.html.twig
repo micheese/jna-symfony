@@ -153,12 +153,15 @@
                 <div class="span9">
 
                     <form id="contact-form" class="contact-form" action="{{ path('main_homepage') }}" method="post">
+                        <label>Nom : </label>
                         <p class="contact-name">
                             {{ form_row(form.name) }}
                         </p>
+                        <label>Couriel : </label>
                         <p class="contact-email">
                             {{ form_row(form.email) }}
                         </p>
+                        <label>Votre demande : </label>
                         <p class="contact-message">
                             {{ form_row(form.body) }}
                         </p>
