@@ -23,7 +23,7 @@ class DefaultController extends Controller
                 $message = \Swift_Message::newInstance()
                     ->setSubject('Demande provenant du site internet JNA renovation.')
                     ->setFrom($enquiry->getEmail())
-                    ->setTo('jean-nicolas@jna-renovation.com')
+                    ->setTo('michael_chemani@hotmail.com')
                     ->setBody($this->renderView('mainBundle:Default:email-template.html.twig', array(
                         'enquiry' => $enquiry
                     )));
