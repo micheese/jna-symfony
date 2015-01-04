@@ -22,7 +22,6 @@ class DefaultController extends Controller
             if ($form->isValid()) {
                 $message = \Swift_Message::newInstance()
                     ->setSubject('Demande provenant du site internet JNA renovation.')
-                    ->setFrom($enquiry->getEmail())
                     ->setTo('michael_chemani@hotmail.com')
                     ->setBody($this->renderView('mainBundle:Default:email-template.html.twig', array(
                         'enquiry' => $enquiry
